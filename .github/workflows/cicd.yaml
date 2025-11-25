@@ -84,6 +84,6 @@ jobs:
             --parameters 'commands=[
               "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-south-1.amazonaws.com",
               "cd /home/ubuntu/app || mkdir -p /home/ubuntu/app && cd /home/ubuntu/app",
-              "docker compose pull",
-              "docker compose up -d --remove-orphans"
+              "docker compose -f ./compose.yaml pull",
+              "docker compose -f ./compose.yaml up -d --remove-orphans"
             ]'
