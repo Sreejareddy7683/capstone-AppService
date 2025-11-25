@@ -1,27 +1,32 @@
+version: "3.9"
 
 services:
   redis:
-    image: 'redislabs/redismod'
+    image: "redislabs/redismod"
     ports:
-      - '6379:6379'
+      - "6379:6379"
+
   web1:
-    restart: on-failure
     build: ./web
+    image: "${ECR_REGISTRY}/web1:latest"
+    restart: on-failure
     hostname: web1
     ports:
-      - '81:5000'
+      - "81:5000"
+
   web2:
-    restart: on-failure
     build: ./web
+    image: "${ECR_REGISTRY}/web2:latest"
+    restart: on-failure
     hostname: web2
     ports:
-      - '82:5000'
+      - "82:5000"
+
   nginx:
     build: ./nginx
+    image: "${ECR_REGISTRY}/nginx:latest"
     ports:
-    - '80:80'
+      - "80:80"
     depends_on:
-    - web1
-    - web2
-
-
+      - web1
+      - web2
