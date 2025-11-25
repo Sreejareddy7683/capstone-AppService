@@ -35,11 +35,11 @@ jobs:
       - name: Build images using Docker Compose
         uses: hoverkraft-tech/compose-action@3846bcd61da338e9eaaf83e7ed0234a12b099b72
         with:
-          compose-file: "./docker/docker-compose.yml"
+          compose-file: "./compose.yml"
 
       - name: Push images to ECR
         run: |
-          docker compose -f ./docker/docker-compose.yml push
+          docker compose -f ./compose.yml push
           
       # - name: Build and Push all images using Docker Compose
       #   run: |
