@@ -6,7 +6,7 @@ services:
 
   web1:
     build: ./web
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:web1
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:web1-${GITHUB_SHA}
     restart: on-failure
     hostname: web1
     ports:
@@ -14,7 +14,7 @@ services:
 
   web2:
     build: ./web
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:web2
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:web2-${GITHUB_SHA}
     restart: on-failure
     hostname: web2
     ports:
@@ -22,7 +22,7 @@ services:
 
   nginx:
     build: ./nginx
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:nginx
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/my-app:nginx-${GITHUB_SHA}
     ports:
       - '80:80'
     depends_on:
