@@ -6,7 +6,7 @@ services:
 
   web1:
     build: ./web
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web1-${GITHUB_SHA}
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web1-${TAG_VALUE}
     restart: on-failure
     hostname: web1
     ports:
@@ -14,7 +14,7 @@ services:
 
   web2:
     build: ./web
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web2-${GITHUB_SHA}
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web2-${TAG_VALUE}
     restart: on-failure
     hostname: web2
     ports:
@@ -22,7 +22,7 @@ services:
 
   nginx:
     build: ./nginx
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:nginx-${GITHUB_SHA}
+    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:nginx-${TAG_VALUE}
     ports:
       - '80:80'
     depends_on:
