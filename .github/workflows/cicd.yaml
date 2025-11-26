@@ -7,6 +7,7 @@ on:
 
 #creating environment variables
 env:
+  ECR_REPOSITORY: my-app
   AWS_REGION: ap-south-1
   TAG_VALUE: ${{ github.sha }}
 
