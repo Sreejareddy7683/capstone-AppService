@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY: my-app
-  #TAG_VALUE: ${{ github.sha }}
+  TAG_VALUE: ${{ github.sha }}
 
 jobs:
   docker-build:
