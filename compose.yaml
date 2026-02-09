@@ -9,8 +9,7 @@ services:
   #web1 is the first instance of the Node.js application(used for load balancing with nginx)
   web1:
     build: ./web
-    #Image is tagged and pushed to AWS ECR using TAG_VALUE
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web1-${TAG_VALUE}
+    image: capstone1.azurecr.io/capstone-web:${TAG_VALUE:-latest}
     restart: on-failure
     hostname: web1
     ports:
@@ -19,7 +18,7 @@ services:
   #web2 is the second instance of the Node.js application(used for load balancing with nginx)
   web2:
     build: ./web
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:web2-${TAG_VALUE}
+    image: capstone1.azurecr.io/capstone-web:${TAG_VALUE:-latest}
     restart: on-failure
     hostname: web2
     ports:
@@ -28,7 +27,7 @@ services:
   #nginx reverse proxy / load balance: Routes traffic to web1 and web2 instances
   nginx:
     build: ./nginx
-    image: 869588908060.dkr.ecr.ap-south-1.amazonaws.com/capstone-project/capstone-repo:nginx-${TAG_VALUE}
+    image: capstone1.azurecr.io/capstone-nginx:${TAG_VALUE:-latest}
     ports:
       - '80:80'
     depends_on:
