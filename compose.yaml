@@ -12,6 +12,8 @@ services:
     image: capstone1.azurecr.io/capstone-web:latest
     restart: on-failure
     hostname: web1
+    environment:
+      - INSTANCE_NAME=web1
     ports:
       - '81:5000'
       
@@ -21,6 +23,8 @@ services:
     image: capstone1.azurecr.io/capstone-web:latest
     restart: on-failure
     hostname: web2
+    environment:
+      - INSTANCE_NAME=web2
     ports:
       - '82:5000'
 

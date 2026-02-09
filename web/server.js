@@ -7,13 +7,16 @@ const redisClient = redis.createClient({
   port: 6379
 });
 
+// Use environment variable for instance name, fallback to hostname
+const instanceName = process.env.INSTANCE_NAME || os.hostname();
+
 app.get('/', function(req, res) {
     redisClient.get('numVisits', function(err, numVisits) {
         numVisitsToDisplay = parseInt(numVisits) + 1;
         if (isNaN(numVisitsToDisplay)) {
             numVisitsToDisplay = 1;
         }
-       res.send(os.hostname() +': Number of visits is: ' + numVisitsToDisplay);
+       res.send(instanceName +': Number of visits is: ' + numVisitsToDisplay);
         numVisits++;
         redisClient.set('numVisits', numVisits);
     });
