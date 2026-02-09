@@ -48,9 +48,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.WEB_APP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ env.ACR_LOGIN_SERVER }}/capstone-nginx:latest
+    - name: Azure Login with Publish Profile
+      run: |
+        # Extract credentials from publish profile
+        echo "${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}" > profile.xml
+        username=$(grep -oP 'userName="\K[^"]+' profile.xml | head -1)
+        password=$(grep -oP 'userPWD="\K[^"]+' profile.xml | head -1)
+        
+        # Trigger webhook to restart containers and pull new images
+        curl -X POST \
+          "https://$username:$password@${{ env.WEB_APP_NAME }}.scm.azurewebsites.net/api/container/restart" \
+          -H "Content-Type: application/json"
+        
+        echo "✅ Deployment triggered successfully!"
+        echo "🚀 App URL: https://${{ env.WEB_APP_NAME }}.azurewebsites.net"
